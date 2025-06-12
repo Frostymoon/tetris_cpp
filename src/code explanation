@@ -1,0 +1,2 @@
+The header file is where we define our object Grid, declare variables in the private section (because they won't be used anywhere else other than the constructors), and an empty constructor.
+The empty constructor is a template that can have the variables declared in the same class. It can also have others but those must be declared elsewhere, like Initialize() from grid.cpp.
