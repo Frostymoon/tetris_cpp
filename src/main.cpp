@@ -11,9 +11,12 @@ int main()
     // without this, the game would run as fast as the PC can handle
     SetTargetFPS(60); 
 
+    Grid grid = Grid(); 
     // Grid is acting like a data type, so we can create a variable of type Grid. grid is the name of the variable, and Grid() is the constructor.
     // basically, we are creating grid onject of type Grid whose values are the ones in the constructor Grid() in grid.cpp
-    Grid grid = Grid(); 
+    grid.grid[0][0] = 1; 
+    grid.grid[3][5] = 4; 
+    grid.grid[17][7] = 7; 
     grid.Print();
 
     //while loop that keeps the window alive until user closes
@@ -22,7 +25,8 @@ int main()
         // starts canvas drawing
         BeginDrawing(); 
         // clears the background with the color defined above
-        ClearBackground(dark_blue); 
+        ClearBackground(dark_blue);
+        grid.Draw(); 
 
         EndDrawing();
     }

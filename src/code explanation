@@ -1,2 +1,30 @@
-The header file is where we define our object Grid, declare variables in the private section (because they won't be used anywhere else other than the constructors), and an empty constructor.
-The empty constructor is a template that can have the variables declared in the same class. It can also have others but those must be declared elsewhere, like Initialize() from grid.cpp.
+```markdown
+## Code Structure Overview
+
+### Header File (`grid.h`)
+
+- **Purpose:** Defines the `Grid` class, declares its private variables, and provides an empty constructor.
+- **Constructor:** The empty constructor allows for variable initialization within the class. Additional variables (like those used in `Initialize()`) must be declared elsewhere, such as in `grid.cpp`.
+- **Method Declarations:** `Initialize()` and `Print()` methods are declared with `void` return types, as they do not return values.
+
+### Implementation File (`grid.cpp`)
+
+- **Method Definitions:** The actual functionality for `Initialize()` and `Print()` is implemented here.
+- **Object Creation:** A `Grid` object is created, its variables are assigned values, and the `Initialize()` method is called.
+- **Method Details:**
+    - `Initialize()`: Sets all grid elements to `0`.
+    - `Print()`: Displays the grid in the console, formatting elements with spaces.
+
+### Main File (`main.cpp`)
+
+- **Integration:** Brings together all components. A `Grid` object is created (identical to the one in `grid.cpp`) and its output is printed.
+
+### Best Practices
+
+- **Separation of Concerns:** The header file is used for declaring classes, constructors, and methods, while their implementations are placed in separate source files. This avoids redundant declarations and keeps `#include` statements clean.
+- **Usage:** To use a class or method, simply `#include "header.h"` in your source file.
+
+### Additional Functionality
+
+- In `grid.cpp`, the `Draw()` method is implemented to render rectangles on the game screen. The color is determined by `cell_size` as an index in the `std::vector<Colors>` structure.
+```
