@@ -1,30 +1,55 @@
 ```markdown
-## Code Structure Overview
+# Tetris C++ Project
 
-### Header File (`grid.h`)
+This project implements a simple Tetris game in C++. Below is an overview of the code structure and key components.
 
-- **Purpose:** Defines the `Grid` class, declares its private variables, and provides an empty constructor.
-- **Constructor:** The empty constructor allows for variable initialization within the class. Additional variables (like those used in `Initialize()`) must be declared elsewhere, such as in `grid.cpp`.
-- **Method Declarations:** `Initialize()` and `Print()` methods are declared with `void` return types, as they do not return values.
+## Code Structure
 
-### Implementation File (`grid.cpp`)
+### `grid.h` (Header File)
 
-- **Method Definitions:** The actual functionality for `Initialize()` and `Print()` is implemented here.
-- **Object Creation:** A `Grid` object is created, its variables are assigned values, and the `Initialize()` method is called.
-- **Method Details:**
+- **Purpose:** Declares the `Grid` class, its private variables, and an empty constructor.
+- **Constructor:** Used for variable initialization within the class. Any additional variables (such as those used in `Initialize()`) should be declared in the implementation file.
+- **Method Declarations:** Declares `Initialize()` and `Print()` methods, both returning `void`.
+
+### `grid.cpp` (Implementation File)
+
+- **Method Definitions:** Implements the functionality for `Initialize()` and `Print()`.
     - `Initialize()`: Sets all grid elements to `0`.
-    - `Print()`: Displays the grid in the console, formatting elements with spaces.
+    - `Print()`: Outputs the grid to the console, formatting elements with spaces.
+- **Object Creation:** Instantiates a `Grid` object, assigns values to its variables, and calls `Initialize()`.
+- **Additional Functionality:** Implements a `Draw()` method to render rectangles on the game screen. The color is determined by using `cell_size` as an index in a `std::vector<Colors>`.
 
-### Main File (`main.cpp`)
+### `position.h` (Header File)
+- **Purpose:** Declares the `Position` class and a constructor with variables declared only in its scope, to be used in `position.cpp.`
+- **Constructor:** Variables declared ONLY in the constructor scope are used in the initialization file `position.cpp`
 
-- **Integration:** Brings together all components. A `Grid` object is created (identical to the one in `grid.cpp`) and its output is printed.
+### `position.cpp` (Implementation File)
+- **Constructor Creation** Simple constructor made by attributing variables declared in `position.h` to variables in `position.cpp` in this constructor ONLY, using `this ->`.
 
-### Best Practices
+### `colors.h` (Header File)
+- **Declaration of Constants** Declared constants (unchangable) in lowercase (as to not overwrite the existing raylib color consts), as external, to be used anywhere in the project freely.
+- **Declaration of Method** Declared the method `GetCellColors()` that has the return type `vector<Color>`.
 
-- **Separation of Concerns:** The header file is used for declaring classes, constructors, and methods, while their implementations are placed in separate source files. This avoids redundant declarations and keeps `#include` statements clean.
+### `colors.cpp`
+- **Assigning Values** Assigned the appropriate RGBA values to all the colors declared in `colors.h`.
+- **Assigning Behaviour** Made `GetCellColors()` return a vector of vectors associated with each color declared in `colors.h` and in the same order.
+
+### `main.cpp` (Main File)
+
+- **Integration:** Combines all components. Creates a `Grid` object and prints its output, similar to the process in `grid.cpp`.
+
+## Best Practices
+
+- **Separation of Concerns:** Keep class declarations, constructors, and method signatures in header files, and place implementations in source files. This reduces redundancy and keeps `#include` statements organized.
 - **Usage:** To use a class or method, simply `#include "header.h"` in your source file.
 
-### Additional Functionality
+## Getting Started
 
-- In `grid.cpp`, the `Draw()` method is implemented to render rectangles on the game screen. The color is determined by `cell_size` as an index in the `std::vector<Colors>` structure.
+1. Clone the repository.
+2. Build the project using your preferred C++ compiler.
+3. Run the executable to start the Tetris game.
+
+## License
+
+This project is for educational purposes.
 ```

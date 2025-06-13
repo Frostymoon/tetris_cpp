@@ -13,7 +13,6 @@ class Grid{
         int num_cols;
         int cell_size; // in pixels
         std::vector<Color> colors; // declaring the vector (list / array) of colors that will be used for blocks or pieces
-        std::vector<Color> GetCellColors(); //declaring method that gets all the colors we need for blockk and empty cells
     public:
         Grid(); //empty constructor
 
