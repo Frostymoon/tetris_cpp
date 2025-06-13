@@ -10,7 +10,7 @@ class Block {
         int cell_size;
         int rotation_state;
         std::vector<Color> colors;
-        // ^ this method is in the privave space because the constructor used in "block.cpp" will not be used anywhere else other than the blocks.
+        // ^ this method is in the private space because the constructor used in "block.cpp" will not be used anywhere else other than the blocks.
         int row_offset;
         int column_offset;
         // variables used for moving blocks
@@ -21,4 +21,6 @@ class Block {
         std::map<int, std::vector<Position>> cells;
         void Draw();
 
+        void Move(int rows, int columns);
+        std::vector<Position> GetCellPositions();
 };

@@ -18,6 +18,8 @@ int main()
     grid.Print();
 
     TBlock block = TBlock();
+    //creates object of type TBlock
+    block.Move(4, 3);
 
     //while loop that keeps the window alive until user closes
     while (WindowShouldClose() == false){ 
