@@ -38,6 +38,28 @@ This project implements a simple Tetris game in C++. Below is an overview of the
 
 - **Integration:** Combines all components. Creates a `Grid` object and prints its output, similar to the process in `grid.cpp`.
 
+// ...existing code...
+
+### `block.h` (Header File)
+- **Purpose:** Declares the `Block` class which manages Tetris block behavior and properties
+- **Constructor:** Declares a constructor that initializes block position and cell coordinates
+- **Method Declarations:** Includes methods for block movement (Move(), Rotate()) and drawing
+- **Properties:** Contains block position, rotation state, and cell coordinates
+
+### `block_init.cpp` (Implementation File) 
+- **Constructor Implementation:** Implements the Block constructor to set initial position
+- **Draw Method:** Implements drawing functionality for blocks using the grid system
+- **Movement Logic:** Contains implementations for Move() method to handle block translation
+- **Rotation:** Implements Rotate() method for block rotation mechanics
+
+### `block_pieces.cpp`
+- **Piece Definitions:** Contains the coordinate definitions for all 7 standard Tetris pieces
+- **Data Structure:** Uses 2D vectors to store rotation states for each piece
+- **Rotation Data:** Implements matrices for all 4 possible rotations of each piece
+- **Access Methods:** Provides functions to retrieve piece data and rotation states
+
+// ...existing code...
+
 ## Best Practices
 
 - **Separation of Concerns:** Keep class declarations, constructors, and method signatures in header files, and place implementations in source files. This reduces redundancy and keeps `#include` statements organized.

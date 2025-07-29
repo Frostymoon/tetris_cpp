@@ -5,7 +5,7 @@
 #include "colors.h"
 
 class Block {
-    
+     
     private:
         int cell_size;
         int rotation_state;
