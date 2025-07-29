@@ -15,11 +15,15 @@ int main()
     while (WindowShouldClose() == false){ 
         //while loop that keeps the window alive until user closes
 
+        game.HandleInput();
+        
         game.Draw();
         // calls the Draw method from the game object, which draws the grid AND the current block
+        
         BeginDrawing(); 
-        // clears the background with the color defined above
-        ClearBackground(dark_blue);
+        // clears the background with the color defined above. raylib method!
+        
+        ClearBackground(dark_blue); //raylib method!
         EndDrawing();
     }
 

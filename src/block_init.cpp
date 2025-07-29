@@ -38,3 +38,22 @@ std::vector<Position> Block::GetCellPositions(){
     }
     return move_tiles;
 }
+
+void Block::Rotate()
+{
+    rotation_state++;
+    // increments the rotation_state by 1 when the method is called. It's important that this happens before the check for the size of cells.
+    if (rotation_state == (int) cells.size()){
+        rotation_state = 0; 
+        //when the rotation reaches the last state, reset to 0
+        // .size() is a raylib method that returns the size of the vector
+    }
+}
+
+void Block::UndoRotation()
+{
+    rotation_state--;
+    if (rotation_state == -1){
+        rotation_state = (int) cells.size() -1;
+    }
+}

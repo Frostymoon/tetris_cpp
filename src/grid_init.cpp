@@ -42,3 +42,13 @@ void Grid::Draw(){
         }
     }
 }
+
+bool Grid::IsCellOOB(int row, int column)
+{
+    // check if out of bounds
+    if (row >= 0 && row < num_rows && column >= 0 && column < num_cols){
+        return false; // cell is within bounds
+    } else {
+        return true; // cell is out of bounds
+    }
+}

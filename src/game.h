@@ -7,10 +7,17 @@ private:
     std::vector<Block> blocks;
     Block current_block;
     Block next_block;
-public:
+    bool IsBlockOOB();
+
+    public:
     Game();
     Grid grid;
     Block GetRandomBlock();
     void Draw();
+    void HandleInput();
+    void MoveBlockLeft();
+    void MoveBlockRight();
+    void MoveBlockDown();
+    void RotateBlock();
     std::vector<Block> GetAllBlocks();
 };
