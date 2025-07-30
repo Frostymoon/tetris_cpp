@@ -67,13 +67,13 @@ void Game::HandleInput()
 void Game:: MoveBlockLeft(){
     current_block.Move(0, -1);
     // Original Move method is in the Block class.
-    if (IsBlockOOB()) {
+    if (IsBlockOOB() || !BlockFits()) {
         current_block.Move(0, 1); // Undo the move if it goes out of bounds
     }
 }
 void Game::MoveBlockRight(){
     current_block.Move(0, 1);
-    if (IsBlockOOB()) {
+    if (IsBlockOOB() || !BlockFits()) {
         current_block.Move(0, -1);
     }
 }
@@ -87,7 +87,7 @@ void Game::MoveBlockDown(){
 void Game::RotateBlock()
 {
     current_block.Rotate();
-    if (IsBlockOOB()) {
+    if (IsBlockOOB() || !BlockFits()) {
         current_block.UndoRotation();
         // todo maybe move the block to a good position instead of undoing the rotation
     }
