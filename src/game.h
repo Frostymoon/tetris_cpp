@@ -9,6 +9,7 @@ class Game{
         Block next_block;
         bool IsBlockOOB();
         void LockBlock();
+        bool BlockFits();
     
     public:
         Game();

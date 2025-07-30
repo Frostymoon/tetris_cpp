@@ -20,7 +20,7 @@ class Grid{
         void Print();
         void Draw();
         int grid[20][10]; 
-
+        bool IsCellEmpty(int row, int column); 
         bool IsCellOOB(int row, int column);
     
 };

@@ -79,7 +79,7 @@ void Game::MoveBlockRight(){
 }
 void Game::MoveBlockDown(){
     current_block.Move(1, 0);
-    if (IsBlockOOB()) {
+    if (IsBlockOOB() || !BlockFits()) {
         current_block.Move(-1, 0);
         LockBlock();
     }
@@ -113,4 +113,15 @@ void Game::LockBlock()
     }
     current_block = next_block;
     next_block = GetRandomBlock();
+}
+
+bool Game::BlockFits()
+{
+    std::vector<Position> tiles = current_block.GetCellPositions();
+    for (Position item: tiles){
+        if (grid.IsCellEmpty(item.row, item.column) == false){
+            return false; 
+        }
+    }
+    return true;
 }
