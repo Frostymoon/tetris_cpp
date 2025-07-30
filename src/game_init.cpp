@@ -18,8 +18,8 @@ Block Game::GetRandomBlock() {
     }
     
     
-    int random_index = rand() %blocks.size();
-    // Randomly select a block from the blocks vector from 0 to 6, as per the blocks var above
+    int random_index = rand() % blocks.size();
+    // Randomly select a block from the blocks vector from 0 to 6, as per the blocks var above. % is to ensure a whole number.
     Block block = blocks[random_index];
     // creates a block object of type Block using the indexed object from the blocks vector. Basically takes the attribute values of the indexed block and puts them in the Block object.
     blocks.erase(blocks.begin() +random_index);
@@ -45,7 +45,8 @@ void Game::HandleInput()
     int key_pressed = GetKeyPressed();
     // GetKeyPressed() is a raylib function that returns the key that was pressed.
     switch(key_pressed) {
-    case KEY_LEFT:
+    
+        case KEY_LEFT:
         MoveBlockLeft();
         break;
     
@@ -80,6 +81,7 @@ void Game::MoveBlockDown(){
     current_block.Move(1, 0);
     if (IsBlockOOB()) {
         current_block.Move(-1, 0);
+        LockBlock();
     }
 }
 void Game::RotateBlock()
@@ -100,4 +102,15 @@ bool Game::IsBlockOOB()
         }
     }
     return false;
+}
+
+void Game::LockBlock()
+{
+    std::vector<Position> tiles = current_block.GetCellPositions();
+    for (Position item: tiles){
+        grid.grid[item.row][item.column] = current_block.id;
+        
+    }
+    current_block = next_block;
+    next_block = GetRandomBlock();
 }

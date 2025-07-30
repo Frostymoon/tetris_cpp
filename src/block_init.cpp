@@ -28,6 +28,7 @@ void Block :: Move(int rows, int columns) {
 }
 
 std::vector<Position> Block::GetCellPositions(){
+    //this function gets the positions of the cells in the block based on the current rotation state and offsets
     std::vector<Position> tiles = cells[rotation_state];
     std::vector<Position> move_tiles;
     //item type vector<Postion> is a vector of Position objects, which contain row and column
