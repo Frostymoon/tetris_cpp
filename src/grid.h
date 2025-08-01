@@ -15,6 +15,7 @@ class Grid{
         std::vector<Color> colors; // declaring the vector (list / array) of colors that will be used for blocks or pieces
         bool IsRowFull(int row);
         void ClearRow(int row);
+        bool IsColumnFull(int column);
 
     public:
         Grid(); //empty constructor

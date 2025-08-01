@@ -9,6 +9,7 @@ Game::Game()
     blocks = GetAllBlocks();
     current_block = GetRandomBlock();
     next_block = GetRandomBlock();
+    game_over = false;
 }
 
 Block Game::GetRandomBlock() {
@@ -65,32 +66,45 @@ void Game::HandleInput()
 }
 
 void Game:: MoveBlockLeft(){
-    current_block.Move(0, -1);
+    
+    if(!game_over){
+        current_block.Move(0, -1);
     // Original Move method is in the Block class.
-    if (IsBlockOOB() || !BlockFits()) {
-        current_block.Move(0, 1); // Undo the move if it goes out of bounds
+        if (IsBlockOOB() || !BlockFits()) {
+            current_block.Move(0, 1); // Undo the move if it goes out of bounds
+        }
     }
 }
+
 void Game::MoveBlockRight(){
-    current_block.Move(0, 1);
-    if (IsBlockOOB() || !BlockFits()) {
-        current_block.Move(0, -1);
+    
+    if(!game_over){
+        current_block.Move(0, 1);
+        if (IsBlockOOB() || !BlockFits()) {
+            current_block.Move(0, -1);
+        }
     }
 }
 void Game::MoveBlockDown(){
+    
+     if(!game_over){
     current_block.Move(1, 0);
     if (IsBlockOOB() || !BlockFits()) {
         current_block.Move(-1, 0);
         LockBlock();
     }
 }
+}
 void Game::RotateBlock()
 {
+
+     if(!game_over){
     current_block.Rotate();
     if (IsBlockOOB() || !BlockFits()) {
         current_block.UndoRotation();
         // todo maybe move the block to a good position instead of undoing the rotation
     }
+}
 }
 
 bool Game::IsBlockOOB()
@@ -112,6 +126,12 @@ void Game::LockBlock()
         
     }
     current_block = next_block;
+
+    if(!BlockFits()){
+        game_over = true; // If the next block doesn't fit, the game is over
+        return;
+    }
+
     next_block = GetRandomBlock();
     grid.ClearFullRows();
 }
@@ -126,3 +146,4 @@ bool Game::BlockFits()
     }
     return true;
 }
+

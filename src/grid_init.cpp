@@ -107,3 +107,13 @@ void Grid::ClearRow(int row)
         grid[row][column] = 0; 
     }
 }
+
+bool Grid::IsColumnFull(int column)
+{
+    for (int row = 0; row < num_rows; row++){
+        if (grid[row][column] == 0){
+            return false; // if any cell in the column is empty, the column is not full
+        }
+    }
+    return true;
+}
