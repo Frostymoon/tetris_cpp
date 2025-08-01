@@ -13,6 +13,9 @@ class Grid{
         int num_cols;
         int cell_size; // in pixels
         std::vector<Color> colors; // declaring the vector (list / array) of colors that will be used for blocks or pieces
+        bool IsRowFull(int row);
+        void ClearRow(int row);
+
     public:
         Grid(); //empty constructor
 
@@ -22,5 +25,7 @@ class Grid{
         int grid[20][10]; 
         bool IsCellEmpty(int row, int column); 
         bool IsCellOOB(int row, int column);
+        void MoveRowDown(int row, int num_rows);
+        int ClearFullRows();
     
 };
