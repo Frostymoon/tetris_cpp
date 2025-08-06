@@ -22,6 +22,6 @@ class Game{
         void MoveBlockDown();
         void RotateBlock();
         std::vector<Block> GetAllBlocks();
-
+        void Reset();
         bool game_over;
 };

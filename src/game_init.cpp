@@ -33,6 +33,14 @@ std::vector<Block> Game::GetAllBlocks(){
     // refill the blocks vector.
 }
 
+void Game::Reset()
+{
+    grid.Initialize();
+    blocks = GetAllBlocks();
+    current_block = GetRandomBlock();
+    next_block = GetRandomBlock();
+}
+
 void Game::Draw(){
     // initializes the grid and the current block
     grid.Draw();
@@ -45,6 +53,12 @@ void Game::HandleInput()
 {
     int key_pressed = GetKeyPressed();
     // GetKeyPressed() is a raylib function that returns the key that was pressed.
+    if (game_over && key_pressed != 0){
+
+        game_over = false;
+        Reset();
+    }
+    
     switch(key_pressed) {
     
         case KEY_LEFT:
