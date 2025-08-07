@@ -9,6 +9,8 @@ extern const Color yellow;
 extern const Color purple;
 extern const Color cyan;
 extern const Color blue;
+extern const Color light_blue;
+extern const Color dark_blue;
 // ^ "extern" keyword used to make variables accessible across multiple files
 
 std::vector<Color> GetCellColors();

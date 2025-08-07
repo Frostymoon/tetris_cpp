@@ -17,7 +17,7 @@ void Block::Draw(){
     // tile is a vector containing vectors.
     //for each item of type position (containing row and column) in the vector tiles, meaning for each subvector in tiles.
     {
-        DrawRectangle(item.column * cell_size+1, item.row * cell_size+1, cell_size-1, cell_size-1, colors[id]);
+        DrawRectangle(item.column * cell_size+11, item.row * cell_size+11, cell_size-1, cell_size-1, colors[id]);
                   //the ^ column variable in item
     }
 }

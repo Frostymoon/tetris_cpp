@@ -38,7 +38,7 @@ void Grid::Draw(){
     for (int row = 0; row < num_rows; row++){
         for (int column = 0; column < num_cols; column++){
             int cell_value = grid[row][column];
-            DrawRectangle(column * cell_size+1, row * cell_size+1, cell_size-1, cell_size-1, colors[cell_value]);
+            DrawRectangle(column * cell_size+11, row * cell_size+11, cell_size-1, cell_size-1, colors[cell_value]);
             // built-in raylib method
             // this method creates blue grid lines on the game window
         }

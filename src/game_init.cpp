@@ -54,7 +54,6 @@ void Game::HandleInput()
     int key_pressed = GetKeyPressed();
     // GetKeyPressed() is a raylib function that returns the key that was pressed.
     if (game_over && key_pressed != 0){
-
         game_over = false;
         Reset();
     }
