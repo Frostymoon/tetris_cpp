@@ -15,9 +15,13 @@ class Game{
         void MoveBlockLeft();
         void MoveBlockRight();
         Grid grid;
+        Sound move_sound;
+        Sound clear_sound;
+        Sound game_over_sound;
     
     public:
         Game();
+        ~Game();
         void Draw();
         void HandleInput();
         void MoveBlockDown();
@@ -26,4 +30,5 @@ class Game{
         void Reset();
         bool game_over;
         int score;
+        Music music;
 };

@@ -11,7 +11,22 @@ Game::Game()
     next_block = GetRandomBlock();
     game_over = false;
     score = 0;
+    InitAudioDevice(); //raylib method
+    music = LoadMusicStream("B:/Raylib-CPP-Starter-Template-for-VSCODE-V2-main/Sounds/music.mp3");
+    PlayMusicStream(music);
+    move_sound = LoadSound("B:/Raylib-CPP-Starter-Template-for-VSCODE-V2-main/Sounds/move.mp3");
+    clear_sound = LoadSound("B:/Raylib-CPP-Starter-Template-for-VSCODE-V2-main/Sounds/clear_line.mp3");
+    game_over_sound = LoadSound("B:/Raylib-CPP-Starter-Template-for-VSCODE-V2-main/Sounds/game_over.mp3");
 }
+
+Game::~Game(){ //even though destructors are built in and executed automatically, we have to define them someetimes when we want multiple things to happen as the program ends
+    CloseAudioDevice(); 
+    UnloadMusicStream(music);
+    UnloadSound(move_sound);
+    UnloadSound(clear_sound);
+    UnloadSound(game_over_sound);
+}
+
 
 Block Game::GetRandomBlock() {
     if (blocks.empty()) {
@@ -90,6 +105,7 @@ void Game:: MoveBlockLeft(){
         current_block.Move(0, -1); // Original Move method is in the Block class.
         if (IsBlockOOB() || !BlockFits()) {
             current_block.Move(0, 1); // Undo the move if it goes out of bounds
+            PlaySound(move_sound);
         }
     }
 }
@@ -100,6 +116,7 @@ void Game::MoveBlockRight(){
         current_block.Move(0, 1);
         if (IsBlockOOB() || !BlockFits()) {
             current_block.Move(0, -1);
+            PlaySound(move_sound);
         }
     }
 }
@@ -110,6 +127,7 @@ void Game::MoveBlockDown(){
     if (IsBlockOOB() || !BlockFits()) {
         current_block.Move(-1, 0);
         LockBlock();
+        PlaySound(move_sound);
     }
 }
 }
@@ -122,7 +140,10 @@ void Game::RotateBlock()
         current_block.UndoRotation();
         // todo maybe move the block to a good position instead of undoing the rotation
     }
-}
+    else{
+        PlaySound(move_sound); // Play the move sound when the block is rotated successfully 
+        }
+    }
 }
 
 bool Game::IsBlockOOB()
@@ -152,8 +173,10 @@ void Game::LockBlock()
 
     next_block = GetRandomBlock();
     int rows_cleared = grid.ClearFullRows();
-
-    UpdateScore(rows_cleared, 0);
+    if(rows_cleared > 0){
+        PlaySound(clear_sound);
+        UpdateScore(rows_cleared, 0);
+    }
 }
 
 bool Game::BlockFits()

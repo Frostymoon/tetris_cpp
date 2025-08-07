@@ -26,6 +26,9 @@ int main()
     Game game = Game(); // creates a game object of type Game, which contains the grid and the blocks
 
     while (WindowShouldClose() == false){ //while loop that keeps the window alive until user closes
+        
+        UpdateMusicStream(game.music); 
+        
         game.HandleInput();
         
         if (EventTriggered(0.4)){
