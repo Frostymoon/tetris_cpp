@@ -11,15 +11,15 @@ class Game{
         void LockBlock();
         bool BlockFits();
         void UpdateScore(int lines_cleared, int move_down_points);
+        Block GetRandomBlock();
+        void MoveBlockLeft();
+        void MoveBlockRight();
+        Grid grid;
     
     public:
         Game();
-        Grid grid;
-        Block GetRandomBlock();
         void Draw();
         void HandleInput();
-        void MoveBlockLeft();
-        void MoveBlockRight();
         void MoveBlockDown();
         void RotateBlock();
         std::vector<Block> GetAllBlocks();
