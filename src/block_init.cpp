@@ -8,7 +8,7 @@ Block::Block() {
     column_offset = 0;
 };
 
-void Block::Draw(){
+void Block::Draw(int offset_x, int offset_y) {
 
     std::vector<Position> tiles = GetCellPositions();;
 
@@ -17,7 +17,7 @@ void Block::Draw(){
     // tile is a vector containing vectors.
     //for each item of type position (containing row and column) in the vector tiles, meaning for each subvector in tiles.
     {
-        DrawRectangle(item.column * cell_size+11, item.row * cell_size+11, cell_size-1, cell_size-1, colors[id]);
+        DrawRectangle(item.column * cell_size + offset_x, item.row * cell_size + offset_y, cell_size-1, cell_size-1, colors[id]);
                   //the ^ column variable in item
     }
 }

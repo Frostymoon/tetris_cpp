@@ -10,27 +10,23 @@ Game::Game()
     current_block = GetRandomBlock();
     next_block = GetRandomBlock();
     game_over = false;
+    score = 0;
 }
 
 Block Game::GetRandomBlock() {
     if (blocks.empty()) {
-        blocks = GetAllBlocks();
-        // If the blocks vector is empty, refill it with all block types   
+        blocks = GetAllBlocks();// If the blocks vector is empty, refill it with all block types   
     }
     
     
-    int random_index = rand() % blocks.size();
-    // Randomly select a block from the blocks vector from 0 to 6, as per the blocks var above. % is to ensure a whole number.
-    Block block = blocks[random_index];
-    // creates a block object of type Block using the indexed object from the blocks vector. Basically takes the attribute values of the indexed block and puts them in the Block object.
-    blocks.erase(blocks.begin() +random_index);
-    // removes the block from the vector so that it cannot be selected again
+    int random_index = rand() % blocks.size(); // Randomly select a block from the blocks vector from 0 to 6, as per the blocks var above. % is to ensure a whole number.
+    Block block = blocks[random_index]; // creates a block object of type Block using the indexed object from the blocks vector. Basically takes the attribute values of the indexed block and puts them in the Block object.
+    blocks.erase(blocks.begin() +random_index); // removes the block from the vector so that it cannot be selected again
     return block;
 }
 
 std::vector<Block> Game::GetAllBlocks(){
-    return {IBlock(), JBlock(), LBlock(), SBlock(), TBlock(), SqBlock()};
-    // refill the blocks vector.
+    return {IBlock(), JBlock(), LBlock(), SBlock(), TBlock(), SqBlock()}; // refill the blocks vector.
 }
 
 void Game::Reset()
@@ -39,20 +35,29 @@ void Game::Reset()
     blocks = GetAllBlocks();
     current_block = GetRandomBlock();
     next_block = GetRandomBlock();
+    score = 0;
 }
 
-void Game::Draw(){
-    // initializes the grid and the current block
-    grid.Draw();
-    // takes the grid from the Game class, which is taken from the Grid class. The Draw method is also from the Grid class.
-    current_block.Draw();
-    // This Draw method is from thee Block class!
+void Game::Draw(){ // initializes the grid and the current block
+    grid.Draw(); // takes the grid from the Game class, which is taken from the Grid class. The Draw method is also from the Grid class.
+    current_block.Draw(11, 11); // This Draw method is from the Block class! Hardcoded lmao
+    
+    switch (next_block.id) {
+        case 3:
+            next_block.Draw(255, 290);
+            break;
+        case 4:
+            next_block.Draw(255, 280);
+            break;
+        default:
+            next_block.Draw(270, 270);
+            break;
+    }
 }
 
 void Game::HandleInput()
 {
-    int key_pressed = GetKeyPressed();
-    // GetKeyPressed() is a raylib function that returns the key that was pressed.
+    int key_pressed = GetKeyPressed(); // GetKeyPressed() is a raylib function that returns the key that was pressed.
     if (game_over && key_pressed != 0){
         game_over = false;
         Reset();
@@ -70,6 +75,7 @@ void Game::HandleInput()
     
     case KEY_DOWN:
         MoveBlockDown();
+        UpdateScore(0, 1);
         break;
     
     case KEY_UP:
@@ -81,8 +87,7 @@ void Game::HandleInput()
 void Game:: MoveBlockLeft(){
     
     if(!game_over){
-        current_block.Move(0, -1);
-    // Original Move method is in the Block class.
+        current_block.Move(0, -1); // Original Move method is in the Block class.
         if (IsBlockOOB() || !BlockFits()) {
             current_block.Move(0, 1); // Undo the move if it goes out of bounds
         }
@@ -146,7 +151,9 @@ void Game::LockBlock()
     }
 
     next_block = GetRandomBlock();
-    grid.ClearFullRows();
+    int rows_cleared = grid.ClearFullRows();
+
+    UpdateScore(rows_cleared, 0);
 }
 
 bool Game::BlockFits()
@@ -160,3 +167,24 @@ bool Game::BlockFits()
     return true;
 }
 
+void Game::UpdateScore(int lines_cleared, int move_down_points)
+{
+    switch(lines_cleared){
+        case 1:
+            score += 100;
+            break;
+        case 2:
+            score += 300;
+            break;
+        case 3:
+            score += 500;
+            break;
+        case 4:
+            score += 1000;
+            break;
+        default:
+            break;
+    }
+
+    score += move_down_points; // Add points for moving the block down
+}

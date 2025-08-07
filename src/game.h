@@ -10,6 +10,7 @@ class Game{
         bool IsBlockOOB();
         void LockBlock();
         bool BlockFits();
+        void UpdateScore(int lines_cleared, int move_down_points);
     
     public:
         Game();
@@ -24,4 +25,5 @@ class Game{
         std::vector<Block> GetAllBlocks();
         void Reset();
         bool game_over;
+        int score;
 };
