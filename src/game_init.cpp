@@ -41,7 +41,7 @@ Block Game::GetRandomBlock() {
 }
 
 std::vector<Block> Game::GetAllBlocks(){
-    return {IBlock(), JBlock(), LBlock(), SBlock(), TBlock(), SqBlock()}; // refill the blocks vector.
+    return {IBlock(), JBlock(), LBlock(), SBlock(), TBlock(), SqBlock(), ZBlock()}; // refill the blocks vector.
 }
 
 void Game::Reset()
